@@ -1,0 +1,16 @@
+.bordure-bleue{
+    border: 2px solid;
+    border-color: rgb(0, 0, 204);
+}
+.bordure-verte{
+    border: 2px solid;
+    border-color:rgb(0, 102, 31);
+}
+.bordure-orange{
+    border: 2px solid;
+    border-color:rgb(252, 164, 0);
+}
+.bordure-verte{
+    border: 2px solid;
+    border-color:rgb(255, 8, 8);
+}
