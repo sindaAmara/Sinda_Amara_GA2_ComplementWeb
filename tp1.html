@@ -6,27 +6,32 @@
 
 </head>
 <body>
-    <section id="temperature" >
+    <button id="btnAutre" name="actuelle" aria-selected="true">
+            Actuelle
+    </button>
+    <button id="btnHistorique" name="Historique" aria-selected="false">
+        Historique
+    </button>
+    <section id="temperature" aria-live="polite" >
         <h1>TP1 Complement Web</h1>
         <h2>Exercice 1</h2>
         <h3>Temperature actuelle</h3>
         <p>
-            <span id ="valeurTemp"></span> °C
+            <span id ="valeurTemp" aria-live="polite"></span> °C
         </p>
-        <p id="valeurPhrase" aria-live="polite"></p>
-        <p>
-        <data id="valeurTemp" value="">
-            0
-        </data>
-        <abbr title="degrés Celsius">°C</abbr>
-        </p>
+        
 
+    </section>
+    <section id = "temp" >
+        <p id="valeurPhrase" aria-live="polite"></p>
+        
         <p id="plageTemp"></p>
 
         <h2>Historique des températures</h2>
         <ul id="historique"></ul>
 
     </section>
+
 
     <script src="tp1.js"></script>
 

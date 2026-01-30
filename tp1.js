@@ -1,72 +1,82 @@
+class Température {
 
-var tableau = [];
+    constructor() {
+        this.valeur0 = document.getElementById("valeurTemp");
+        this.valeur1 = document.getElementById("valeurPhrase");
+        this.plage = document.getElementById("plageTemp");
+        this.historique = document.getElementById("historique");
 
-for(var i= 0; i<20; i++){
-    tableau[i]= Math.floor(Math.random() * 51) -10;
+        this.i = 0;
+    }
+
+    createTab() {
+        this.tableau = [];
+        for (let i = 0; i < 20; i++) {
+            this.tableau.push(Math.floor(Math.random() * 51) - 10);
+        }
+    }
+
+    definirPlage(valeur) {
+        if (valeur < 0) return "Température négative (froid)";
+        if (valeur < 20) return "Température fraîche";
+        if (valeur < 30) return "Température tempérée";
+        return "Température élevée (chaud)";
+    }
+
+    afficherPhrase(valeur) {
+        this.valeur1.textContent = "";
+        if (valeur < 0) {
+            this.valeur1.textContent = "Brrrrrrr, mets ta cagoule !";
+        }
+        else if (valeur >= 30) {
+            this.valeur1.textContent = "Caliente ! Vamos a la playa ";
+        }
+    }
+
+    afficherValeur() {
+
+        if (this.i >= this.tableau.length) {
+            return;
+        }
+
+        const temp = this.tableau[this.i];
+
+        this.valeur0.textContent = temp;
+        this.valeur0.className = "";
+
+        if (temp < 0) {
+            this.valeur0.classList.add("bordure-bleue");
+        }
+        else if (temp < 20) {
+            this.valeur0.classList.add("bordure-verte");
+        }
+        else if (temp < 30) {
+            this.valeur0.classList.add("bordure-orange");
+        }
+        else {
+            this.valeur0.classList.add("bordure-rouge");
+        }
+
+        this.afficherPhrase(temp);
+        this.plage.textContent = this.definirPlage(temp);
+
+        const li = document.createElement("li");
+        li.textContent = `${temp} °C — ${this.definirPlage(temp)}`;
+        this.historique.appendChild(li);
+
+        this.i++;
+    }
+
+    demarrer() {
+        this.afficherValeur();
+        this.timer = setInterval(() => this.afficherValeur(), 2000);
+    }
+    cacher(){
+        
+    }
 }
-var valeur0 = document.getElementById("valeurTemp");
 
-
-valeur0.innerHTML = tableau[0];
-var i = 0;
-
-var valeur1 = document.getElementById("valeurPhrase");
-
-var plage = document.getElementById("plageTemp");
-var historique = document.getElementById("historique");
-
-function definirPlage(valeur) {
-    if (valeur < 0) return "Température négative (froid!!)";
-    if (valeur < 20) return "Température fraîche";
-    if (valeur < 30) return "Température tempérée";
-    return "Température élevée (chaud!!!!)";
-}
-
-function afficherPhrase(valeur){
-    if (valeur < 0) {
-        valeur1.textContent= "Brrrrrrr, un peu froid ce matin, mets ta cagoule !";
-    }
-    else if (valeur >= 30 && valeur <= 40) {
-        valeur1.textContent= "Caliente ! Vamos a la playa,ho hoho hoho !!";
-    }
-}
-function afficherValeur(){
-    
-    if  (i>= tableau.length){
-        return
-    }
-    valeur0.textContent= tableau[i];
-    valeur0.className= "";
-
-    if (tableau[i] < 0) {
-        valeur0.classList.add("bordure-bleue");
-        afficherPhrase(tableau[i]);
-    }
-    else if (tableau[i] >= 0 && tableau[i] < 20) {
-        valeur0.classList.add("bordure-verte");
-    }
-    else if (tableau[i] >= 20 && tableau[i] < 30) {
-            valeur0.classList.add("bordure-orange");
-    }
-    else if (tableau[i] >= 30 && tableau[i] <= 40) {
-        valeur0.classList.add("bordure-rouge");            
-        afficherPhrase(tableau[i]);
-
-    }
-    valeur0.value = tableau[i];
-    plage.textContent = definirPlage(tableau[i]);
-
-    var li = document.createElement("li");
-    li.textContent = tableau[i] + " °C — " + definirPlage(tableau[i]);
-    historique.appendChild(li);
-
-    i++;
-    
-    
-}
-
-
-afficherValeur();
-setInterval(afficherValeur, 2000);
-
-console.log(tableau);
+document.addEventListener("DOMContentLoaded", () => {
+    const app = new Température();
+    app.demarrer();
+});
